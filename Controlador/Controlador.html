@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Control Carrito ESP32 - MQTT</title>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2>Control del Carrito ESP32 por MQTT</h2>
+
+  <div class="control-panel">
+    <!-- Icono relacionado con potencia -->
+    <div style="margin-bottom: 10px;">
+      <img src="img/power.svg" alt="Potencia Icono" style="width: 40px; height: 40px;">
+    </div>
+
+    <div class="potencia-label">Potencia (100 - 1023):</div>
+    <input type="number" id="potencia" min="100" max="1023" value="900" oninput="validarPotencia()" />
+    <div id="potencia-error" style="color:red; font-size:12px;"></div>
+
+    <br><br>
+
+    <div>
+      <button class="adelante" onclick="enviar('10')">
+        <img class="img-icon" src="img/arriba.svg" alt="⬆" /> Adelante
+      </button><br>
+
+      <button class="direccion" onclick="enviar('4')">
+        <img class="img-icon" src="img/arriba_izquierda.svg" alt="⬅" /> Adelante Izquierda
+      </button>
+      <button class="direccion" onclick="enviar('3')">
+        <img class="img-icon" src="img/arriba_derecha.svg" alt="➡" /> Adelante Derecha
+      </button><br>
+
+      <button class="direccion" onclick="enviar('6')">
+        <img class="img-icon" src="img/abajo_izquierda.svg" alt="↙" /> Atrás Izquierda
+      </button>
+      <button class="direccion" onclick="enviar('5')">
+        <img class="img-icon" src="img/abajo_derecha.svg" alt="↘" /> Atrás Derecha
+      </button><br>
+
+      <button class="atras" onclick="enviar('-10')">
+        <img class="img-icon" src="img/abajo.svg" alt="⬇" /> Atrás
+      </button><br>
+
+      <button class="especial" onclick="enviar('100')">
+        <img class="img-icon" src="img/shot.svg" alt="🔥" /> Disparar
+      </button>
+      <button class="detener" onclick="enviar('0')">
+        <img class="img-icon" src="img/stop.svg" alt="🛑" /> Detener
+      </button>
+    </div>
+
+    <div id="status">Esperando conexión...</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
